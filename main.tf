@@ -3,6 +3,7 @@
 # Define the provider
 provider "azurerm" {
   features {}
+  skip_provider_registration = true
 }
 
 # Define the resource group
