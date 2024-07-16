@@ -1,0 +1,45 @@
+# azure-pipelines.yml
+
+trigger:
+- main  # or your branch name
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  # Terraform variables
+  TF_VAR_subscription_id: 'fa4346f9-b67e-426f-80f7-9e50286c7bf7'
+  TF_VAR_client_id: 'a4d0d235-26a0-44e7-8068-5856c4ad805d'
+  TF_VAR_client_secret: '4fec0dfb-5cf6-4196-aedb-030f846efa8e'
+  TF_VAR_tenant_id: '2a1907c3-592c-40cb-8a88-7f2d40bd937a'
+  TF_DATA_DIR: "$(System.DefaultWorkingDirectory)/.terraform"
+
+jobs:
+- job: Terraform
+  displayName: 'Run Terraform'
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.x'
+      addToPath: true
+
+  - script: |
+      curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    displayName: 'Install Azure CLI'
+
+  - script: |
+      curl -o terraform.zip https://releases.hashicorp.com/terraform/1.1.7/terraform_1.1.7_linux_amd64.zip
+      unzip terraform.zip
+      sudo mv terraform /usr/local/bin/
+      terraform version
+    displayName: 'Install Terraform'
+  - task: AzureCLI@2
+    inputs:
+      azureSubscription: 'test-resource-manager' 
+      scriptType: 'bash' 
+      scriptLocation: 'inlineScript' 
+      inlineScript: | 
+        terraform init
+        terraform plan -out=tfplan
+        terraform apply -auto-approve tfplan
+      workingDirectory: '$(System.DefaultWorkingDirectory)'
