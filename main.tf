@@ -9,7 +9,7 @@ provider "azurerm" {
 # Define the resource group
 resource "azurerm_resource_group" "Test" {
   name     = "Test_group"
-  location = "brazilsoutheast"
+  location = "brazilsouth"
 }
 
 # Define the virtual network
