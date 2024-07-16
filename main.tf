@@ -15,7 +15,7 @@ resource "azurerm_resource_group" "Test" {
 resource "azurerm_virtual_network" "TestVnet" {
   name                = "Brazil-TestVnet"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.brazilsoutheast.location
+  location            = azurerm_resource_group.Test.location
   resource_group_name = azurerm_resource_group.Test.name
 }
 
