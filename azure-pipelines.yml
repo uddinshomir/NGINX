@@ -9,8 +9,8 @@ pool:
 variables:
   # Terraform variables
   TF_VAR_subscription_id: 'fa4346f9-b67e-426f-80f7-9e50286c7bf7'
-  TF_VAR_client_id: 'a4d0d235-26a0-44e7-8068-5856c4ad805d'
-  TF_VAR_client_secret: '4fec0dfb-5cf6-4196-aedb-030f846efa8e'
+  TF_VAR_client_id: '31bc2bd6-6735-4cbf-b67d-43a732a6bc99'
+  TF_VAR_client_secret: 'dd918f61-145f-4ff8-8652-db24d73944db'
   TF_VAR_tenant_id: '2a1907c3-592c-40cb-8a88-7f2d40bd937a'
   TF_DATA_DIR: "$(System.DefaultWorkingDirectory)/.terraform"
 
